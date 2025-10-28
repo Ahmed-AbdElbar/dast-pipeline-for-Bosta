@@ -1,0 +1,29 @@
+{
+  "summary": {
+    "customFindings": 0,
+    "zapFindings": 0,
+    "totalFindings": 0
+  },
+  "customFindings": [],
+  "apis": [
+    {
+      "endpoint": "/api/v2/pickups",
+      "method": "POST",
+      "name": "Create Pickup"
+    },
+    {
+      "endpoint": "/api/v2/businesses/add-bank-info",
+      "method": "POST",
+      "name": "Update Bank Info"
+    },
+    {
+      "endpoint": "/api/v2/users/forget-password",
+      "method": "POST",
+      "name": "Forget Password"
+    }
+  ],
+  "zapFindings": [],
+  "scanType": "DAST - Enhanced with Custom Tests",
+  "timestamp": "2025-10-28 04:55:07",
+  "target": "Bosta APIs"
+}
