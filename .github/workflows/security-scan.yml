@@ -56,12 +56,23 @@ jobs:
           timeout 120 bash -c 'until curl -s http://localhost:8080 > /dev/null; do sleep 2; done'
           echo "✅ ZAP is ready!"
 
-      - name: Run Security Tests (Auto-generates reports!)
+      - name: Run Security Tests
         working-directory: .
         run: |
           echo "🧪 Running security tests..."
           mvn test -Dtest=SecurityTestSuite
-          echo "✅ Tests completed! Reports auto-generated."
+          echo "✅ Tests completed!"
+        continue-on-error: true
+
+      - name: Generate Enhanced Security Reports
+        working-directory: .
+        run: |
+          echo "📊 Generating enhanced security reports..."
+          mvn exec:java -Dexec.mainClass="com.security.report.EnhancedReportGenerator" \
+            -Dexec.cleanupDaemonThreads=false \
+            -Dzap.proxy.host=localhost \
+            -Dzap.proxy.port=8080
+          echo "✅ Reports generated!"
         continue-on-error: true
 
       - name: Generate ZAP HTML Report

@@ -22,8 +22,33 @@ public class EnhancedReportGenerator {
     private static final String FINDINGS_FILE = "target/custom-findings.json";
     private static ClientApi zapApi;
     private static List<CustomFinding> customFindings = new ArrayList<>();
+    private static String getFindingsFilePath() {
+        // Try multiple possible locations
+        String[] possiblePaths = {
+                "target/custom-findings.json",
+                "./target/custom-findings.json",
+                "../target/custom-findings.json",
+                System.getProperty("user.dir") + "/target/custom-findings.json"
+        };
+
+        for (String path : possiblePaths) {
+            File file = new File(path);
+            if (file.exists()) {
+                System.out.println("✓ Found findings file at: " + file.getAbsolutePath());
+                return path;
+            }
+        }
+
+        System.out.println("⚠ No findings file found. Checked:");
+        for (String path : possiblePaths) {
+            System.out.println("  - " + new File(path).getAbsolutePath());
+        }
+
+        return "target/custom-findings.json"; // fallback
+    }
 
     public static void main(String[] args) {
+
         try {
             System.out.println("╔═══════════════════════════════════════════════════════════════╗");
             System.out.println("║    Generating Enhanced Security Report with Custom Findings  ║");
@@ -63,17 +88,35 @@ public class EnhancedReportGenerator {
 
     private static void loadCustomFindings() {
         try {
-            File findingsFile = new File(FINDINGS_FILE);
+            String findingsPath = getFindingsFilePath();
+            File findingsFile = new File(findingsPath);
+
+            System.out.println("Looking for findings at: " + findingsFile.getAbsolutePath());
+
             if (findingsFile.exists()) {
                 ObjectMapper mapper = new ObjectMapper();
                 CustomFinding[] findings = mapper.readValue(findingsFile, CustomFinding[].class);
                 customFindings = Arrays.asList(findings);
                 System.out.println("✓ Loaded " + customFindings.size() + " custom findings from tests");
             } else {
-                System.out.println("⚠ No custom findings file found at: " + FINDINGS_FILE);
+                System.out.println("⚠ No custom findings file found at: " + findingsFile.getAbsolutePath());
+                System.out.println("⚠ Current working directory: " + System.getProperty("user.dir"));
+                System.out.println("⚠ Listing target directory contents:");
+                File targetDir = new File("target");
+                if (targetDir.exists() && targetDir.isDirectory()) {
+                    File[] files = targetDir.listFiles();
+                    if (files != null) {
+                        for (File f : files) {
+                            System.out.println("  - " + f.getName());
+                        }
+                    }
+                } else {
+                    System.out.println("  Target directory does not exist!");
+                }
             }
         } catch (Exception e) {
             System.err.println("Error loading custom findings: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
