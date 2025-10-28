@@ -36,7 +36,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          cache-dependency-path: 'pom.xml'   # path fix (pom.xml is at repo root)
 
       - name: Build with Maven
         working-directory: .
