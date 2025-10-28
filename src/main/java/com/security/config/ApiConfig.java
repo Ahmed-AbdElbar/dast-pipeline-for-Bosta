@@ -25,7 +25,7 @@ public class ApiConfig {
     // Test Data
     public static final String BUSINESS_LOCATION_ID = "MFqXsoFhxO";
     public static final String CONTACT_PERSON_ID = "_sCFBrHGi";
-    public static final String TEST_EMAIL = "amira.mosa+991@bosta.co";
+    public static final String TEST_EMAIL = "amira.mosa991@bosta.co";
     public static final String TEST_PHONE = "+201055592829";
     public static final String TEST_NAME = "test name";
     

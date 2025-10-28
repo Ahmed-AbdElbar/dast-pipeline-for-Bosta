@@ -47,11 +47,14 @@ public class BaseSecurityTest {
             System.err.println("Failed to configure ZAP: " + e.getMessage());
         }
 
-        // Configure RestAssured to use ZAP proxy
+        // Configure RestAssured to use ZAP proxy with proper encoding
         RestAssuredConfig config = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
                         .setParam("http.connection.timeout", 30000)
-                        .setParam("http.socket.timeout", 30000));
+                        .setParam("http.socket.timeout", 30000))
+                .encoderConfig(io.restassured.config.EncoderConfig.encoderConfig()
+                        .appendDefaultContentCharsetToContentTypeIfUndefined(false)
+                        .encodeContentTypeAs("application/json", io.restassured.http.ContentType.JSON));
 
         RestAssured.config = config;
         RestAssured.proxy(zapProxyHost, zapProxyPort);
@@ -87,6 +90,7 @@ public class BaseSecurityTest {
 
     protected RequestSpecification getPickupRequestSpec() {
         return RestAssured.given()
+                .contentType(io.restassured.http.ContentType.JSON)
                 .header("accept", "application/json, text/plain, */*")
                 .header("accept-language", "en")
                 .header("content-type", "application/json; charset=utf-8")
@@ -100,6 +104,7 @@ public class BaseSecurityTest {
 
     protected RequestSpecification getBankInfoRequestSpec() {
         return RestAssured.given()
+                .contentType(io.restassured.http.ContentType.JSON)
                 .header("Accept", "application/json, text/plain, */*")
                 .header("Content-Type", "application/json; charset=utf-8")
                 .header("Referer", BUSINESS_BASE_URL + "/")
@@ -110,6 +115,7 @@ public class BaseSecurityTest {
 
     protected RequestSpecification getForgetPasswordRequestSpec() {
         return RestAssured.given()
+                .contentType(io.restassured.http.ContentType.JSON)
                 .header("accept", "application/json, text/plain, */*")
                 .header("accept-language", "en")
                 .header("content-type", "application/json; charset=utf-8")
