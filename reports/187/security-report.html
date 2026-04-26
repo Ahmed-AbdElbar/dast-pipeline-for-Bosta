@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Assessment Report - Bosta APIs</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 3rem 0; margin-bottom: 2rem; }
+header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.subtitle { font-size: 1.2rem; opacity: 0.9; }
+.date { font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+section { background: #1e293b; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+h2 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #f1f5f9; border-bottom: 2px solid #475569; padding-bottom: 0.5rem; }
+h3 { font-size: 1.4rem; margin: 1.5rem 0 1rem; color: #cbd5e1; }
+h4 { font-size: 1.1rem; margin: 0.5rem 0; color: #f1f5f9; }
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+.stat-card { padding: 1.5rem; border-radius: 8px; text-align: center; }
+.stat-card.critical { background: linear-gradient(135deg, #dc2626, #991b1b); }
+.stat-card.medium { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.stat-card.low { background: linear-gradient(135deg, #eab308, #ca8a04); }
+.stat-card.info { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.stat-number { font-size: 3rem; font-weight: bold; }
+.stat-label { font-size: 1rem; opacity: 0.9; margin-top: 0.5rem; }
+.stat-detail { font-size: 0.85rem; opacity: 0.8; margin-top: 0.5rem; }
+.summary-note { margin-top: 1.5rem; padding: 1rem; background: #334155; border-radius: 6px; text-align: center; }
+.custom-findings { border-left: 4px solid #f59e0b; }
+.findings-summary { background: #334155; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; }
+.api-findings { margin-bottom: 2rem; }
+.info-box { background: #065f46; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #10b981; }
+.vulnerability { background: #334155; padding: 1.5rem; border-radius: 6px; margin-bottom: 1.5rem; border-left: 4px solid #64748b; }
+.vulnerability.critical { border-left-color: #dc2626; background: linear-gradient(90deg, rgba(220, 38, 38, 0.1) 0%, #334155 10%); }
+.vulnerability.medium { border-left-color: #f59e0b; background: linear-gradient(90deg, rgba(245, 158, 11, 0.1) 0%, #334155 10%); }
+.vulnerability.low { border-left-color: #eab308; }
+.vuln-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+.severity-badge { padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; }
+.severity-badge.critical { background: #dc2626; }
+.severity-badge.medium { background: #f59e0b; }
+.severity-badge.low { background: #eab308; color: #000; }
+.severity-badge.info { background: #3b82f6; }
+.vuln-details p { margin-bottom: 0.8rem; }
+.vuln-details code { background: #0f172a; padding: 0.2rem 0.5rem; border-radius: 3px; color: #60a5fa; font-size: 0.9rem; }
+.api-list { display: grid; gap: 1rem; }
+.api-item { background: #334155; padding: 1.5rem; border-radius: 6px; border-left: 4px solid #667eea; }
+.api-item code { background: #0f172a; padding: 0.2rem 0.5rem; border-radius: 3px; color: #60a5fa; }
+.api-stats { color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem; }
+.coverage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.test-list { list-style: none; padding-left: 0; }
+.test-list li { padding: 0.5rem; background: #334155; border-radius: 4px; margin-bottom: 0.5rem; }
+footer { background: #0f172a; padding: 2rem 0; margin-top: 3rem; text-align: center; opacity: 0.8; }
+code { font-family: 'Courier New', monospace; }    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔒 Enhanced Security Assessment Report</h1>
+            <p class="subtitle">Automated Security Testing for Bosta APIs</p>
+            <p class="date">Generated: 2026-04-26 04:55:15</p>
+        </div>
+    </header>
+    <div class="container">
+        <section class="summary">
+            <h2>📊 Executive Summary</h2>
+            <div class="summary-grid">
+                <div class="stat-card critical">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Critical/High</div>
+                    <div class="stat-detail">Custom: 2 | ZAP: 0</div>
+                </div>
+                <div class="stat-card medium">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">Medium</div>
+                    <div class="stat-detail">Custom: 0 | ZAP: 11</div>
+                </div>
+                <div class="stat-card low">
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">Low</div>
+                    <div class="stat-detail">Custom: 0 | ZAP: 24</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Informational</div>
+                    <div class="stat-detail">Custom: 0 | ZAP: 0</div>
+                </div>
+            </div>
+            <div class="summary-note">
+                <strong>Total Findings: 37</strong>
+                <span>(2 from custom tests, 35 from OWASP ZAP)</span>
+            </div>
+        </section>
+        <section class="custom-findings">
+            <h2>🎯 Custom Test Findings (Your Tests)</h2>
+            <div class="findings-summary">
+                <p>Found <strong>2 security issues</strong> through custom testing:</p>
+            </div>
+            <div class="api-findings">
+                <h3>Forget Password API</h3>
+                <div class="vulnerability critical">
+                    <div class="vuln-header">
+                        <h4>Forget Password API: Doesn&#x27;t work without auth - this breaks the user flow!</h4>
+                        <span class="severity-badge critical">HIGH</span>
+                    </div>
+                    <div class="vuln-details">
+                        <p><strong>Test:</strong> <code>unknown</code></p>
+                        <p><strong>Detected:</strong> 2026-04-26T04:55:07.676420131</p>
+                        <p><strong>Source:</strong> Custom Security Test</p>
+                    </div>
+                </div>
+            </div>
+            <div class="api-findings">
+                <h3>Update Bank Info API</h3>
+                <div class="vulnerability critical">
+                    <div class="vuln-header">
+                        <h4>Bank Info API: Insufficient rate limiting - 100 requests succeeded</h4>
+                        <span class="severity-badge critical">HIGH</span>
+                    </div>
+                    <div class="vuln-details">
+                        <p><strong>Test:</strong> <code>unknown</code></p>
+                        <p><strong>Detected:</strong> 2026-04-26T04:54:54.072270681</p>
+                        <p><strong>Source:</strong> Custom Security Test</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="apis-tested">
+            <h2>🎯 APIs Tested</h2>
+            <div class="api-list">
+                <div class="api-item">
+                    <h3>1. Create Pickup API</h3>
+                    <p><code>POST /api/v2/pickups</code></p>
+                    <p>Creates pickup requests for delivery agents</p>
+                    <p class="api-stats">Tests: 10 | Findings: 0</p>
+                </div>
+                <div class="api-item">
+                    <h3>2. Update Bank Info API</h3>
+                    <p><code>POST /api/v2/businesses/add-bank-info</code></p>
+                    <p>Updates business bank account details</p>
+                    <p class="api-stats">Tests: 12 | Findings: 1</p>
+                </div>
+                <div class="api-item">
+                    <h3>3. Forget Password API</h3>
+                    <p><code>POST /api/v2/users/forget-password</code></p>
+                    <p>Sends password reset link to users</p>
+                    <p class="api-stats">Tests: 13 | Findings: 1</p>
+                </div>
+            </div>
+        </section>
+        <section class="zap-findings">
+            <h2>🕷️ OWASP ZAP Findings</h2>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/pickups</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/businesses/add-bank-info</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/businesses/add-bank-info</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/businesses/add-bank-info</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Strict-Transport-Security Header Not Set</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>
+                    <p><strong>Reference:</strong> https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html
+https://owasp.org/www-community/Security_Headers
+https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+https://caniuse.com/stricttransportsecurity
+https://datatracker.ietf.org/doc/html/rfc6797</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability low">
+                <div class="vuln-header">
+                    <h4>Server Leaks Information via &quot;X-Powered-By&quot; HTTP Response Header Field(s)</h4>
+                    <span class="severity-badge low">Low</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> The web/application server is leaking information via one or more &quot;X-Powered-By&quot; HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.</p>
+                    <p><strong>Solution:</strong> Ensure that your web server, application server, load balancer, etc. is configured to suppress &quot;X-Powered-By&quot; headers.</p>
+                    <p><strong>Reference:</strong> https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/01-Information_Gathering/08-Fingerprint_Web_Application_Framework
+https://www.troyhunt.com/shhh-dont-let-your-response-headers/</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+            <div class="vulnerability medium">
+                <div class="vuln-header">
+                    <h4>Cross-Domain Misconfiguration</h4>
+                    <span class="severity-badge medium">Medium</span>
+                </div>
+                <div class="vuln-details">
+                    <p><strong>URL:</strong> <code>https://stg-app.bosta.co/api/v2/users/forget-password</code></p>
+                    <p><strong>Description:</strong> Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.</p>
+                    <p><strong>Solution:</strong> Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).
+Configure the &quot;Access-Control-Allow-Origin&quot; HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>
+                    <p><strong>Reference:</strong> https://vulncat.fortify.com/en/detail?category=HTML5&amp;subcategory=Overly%20Permissive%20CORS%20Policy</p>
+                    <p><strong>Source:</strong> OWASP ZAP Automated Scan</p>
+                </div>
+            </div>
+        </section>
+        <section class="test-coverage">
+            <h2>✅ Test Coverage</h2>
+            <div class="coverage-grid">
+                <div class="coverage-column">
+                    <h3>Custom Tests</h3>
+                    <ul class="test-list">
+                        <li>✓ Authentication & Authorization Testing</li>
+                        <li>✓ SQL Injection Testing (11 payloads)</li>
+                        <li>✓ NoSQL Injection Testing (5 payloads)</li>
+                        <li>✓ Cross-Site Scripting (8 XSS payloads)</li>
+                        <li>✓ Input Validation Testing</li>
+                        <li>✓ Rate Limiting Testing</li>
+                        <li>✓ IDOR Vulnerability Testing</li>
+                        <li>✓ Mass Assignment Testing</li>
+                        <li>✓ Token Manipulation Testing</li>
+                        <li>✓ OTP Bypass Testing</li>
+                    </ul>
+                </div>
+                <div class="coverage-column">
+                    <h3>OWASP ZAP Scans</h3>
+                    <ul class="test-list">
+                        <li>✓ Spider Scan (Crawling)</li>
+                        <li>✓ Active Scan (Automated)</li>
+                        <li>✓ Passive Scan (Traffic Analysis)</li>
+                        <li>✓ OWASP Top 10 Checks</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="container">
+            <p>Generated by Enhanced DAST Security Pipeline</p>
+        </div>
+    </footer>
+</body>
+</html>
