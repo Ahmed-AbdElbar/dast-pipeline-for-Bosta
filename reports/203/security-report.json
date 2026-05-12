@@ -1,0 +1,335 @@
+{
+  "summary": {
+    "customFindings": 2,
+    "zapFindings": 36,
+    "totalFindings": 38
+  },
+  "customFindings": [
+    {
+      "severity": "HIGH",
+      "issue": "Bank Info API: Insufficient rate limiting - 100 requests succeeded",
+      "api": "Update Bank Info API",
+      "source": "Custom Test",
+      "testName": "unknown",
+      "timestamp": "2026-05-12T05:33:50.948306102"
+    },
+    {
+      "severity": "HIGH",
+      "issue": "Forget Password API: Doesn't work without auth - this breaks the user flow!",
+      "api": "Forget Password API",
+      "source": "Custom Test",
+      "testName": "unknown",
+      "timestamp": "2026-05-12T05:34:09.539787485"
+    }
+  ],
+  "apis": [
+    {
+      "endpoint": "/api/v2/pickups",
+      "method": "POST",
+      "name": "Create Pickup"
+    },
+    {
+      "endpoint": "/api/v2/businesses/add-bank-info",
+      "method": "POST",
+      "name": "Update Bank Info"
+    },
+    {
+      "endpoint": "/api/v2/users/forget-password",
+      "method": "POST",
+      "name": "Forget Password"
+    }
+  ],
+  "zapFindings": [
+    {
+      "severity": "Low",
+      "solution": "Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.",
+      "name": "Application Error Disclosure",
+      "description": "This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/businesses/add-bank-info"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/businesses/add-bank-info"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/businesses/add-bank-info"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to suppress \"X-Powered-By\" headers.",
+      "name": "Server Leaks Information via \"X-Powered-By\" HTTP Response Header Field(s)",
+      "description": "The web/application server is leaking information via one or more \"X-Powered-By\" HTTP response headers. Access to such information may facilitate attackers identifying other frameworks/components your web application is reliant upon and the vulnerabilities such components may be subject to.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Medium",
+      "solution": "Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).\nConfigure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.",
+      "name": "Cross-Domain Misconfiguration",
+      "description": "Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    }
+  ],
+  "scanType": "DAST - Enhanced with Custom Tests",
+  "timestamp": "2026-05-12 05:34:17",
+  "target": "Bosta APIs"
+}
