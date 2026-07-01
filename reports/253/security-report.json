@@ -1,0 +1,231 @@
+{
+  "summary": {
+    "customFindings": 2,
+    "zapFindings": 23,
+    "totalFindings": 25
+  },
+  "customFindings": [
+    {
+      "severity": "HIGH",
+      "issue": "Bank Info API: Insufficient rate limiting - 100 requests succeeded",
+      "api": "Update Bank Info API",
+      "source": "Custom Test",
+      "testName": "unknown",
+      "timestamp": "2026-07-01T06:20:14.737119467"
+    },
+    {
+      "severity": "HIGH",
+      "issue": "Forget Password API: Doesn't work without auth - this breaks the user flow!",
+      "api": "Forget Password API",
+      "source": "Custom Test",
+      "testName": "unknown",
+      "timestamp": "2026-07-01T06:20:59.682841242"
+    }
+  ],
+  "apis": [
+    {
+      "endpoint": "/api/v2/pickups",
+      "method": "POST",
+      "name": "Create Pickup"
+    },
+    {
+      "endpoint": "/api/v2/businesses/add-bank-info",
+      "method": "POST",
+      "name": "Update Bank Info"
+    },
+    {
+      "endpoint": "/api/v2/users/forget-password",
+      "method": "POST",
+      "name": "Forget Password"
+    }
+  ],
+  "zapFindings": [
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/pickups"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/businesses/add-bank-info"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/businesses/add-bank-info"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/businesses/add-bank-info"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    },
+    {
+      "severity": "Low",
+      "solution": "Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.",
+      "name": "Strict-Transport-Security Header Not Set",
+      "description": "HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.",
+      "source": "OWASP ZAP",
+      "url": "https://stg-app.bosta.co/api/v2/users/forget-password"
+    }
+  ],
+  "scanType": "DAST - Enhanced with Custom Tests",
+  "timestamp": "2026-07-01 06:21:07",
+  "target": "Bosta APIs"
+}
